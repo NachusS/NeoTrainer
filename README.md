@@ -17,5 +17,8 @@ Web app responsive y estática para GitHub Pages.
 - XP, rachas, niveles, logros y registro de dominadas.
 - Persistencia local con `localStorage`; no requiere servidor ni base de datos.
 
+## Entrada a la App
+https://nachuss.github.io/NeoTrainer/
+
 ## Aviso
 La información es orientativa y no sustituye la evaluación de un profesional sanitario o del ejercicio físico.
