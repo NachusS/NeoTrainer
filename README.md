@@ -1,36 +1,24 @@
-# NEO Trainer v3.1.0
+# NEO Trainer v4.0.0
 
-Web-app responsive de entrenamiento personal en casa, diseñada para GitHub Pages.
+Aplicación web estática, responsive y publicable en GitHub Pages.
 
-## Publicación
+## URL del proyecto
 
-1. Descomprime el ZIP.
-2. Sube **el contenido** de la carpeta a la raíz del repositorio.
-3. En GitHub: `Settings > Pages > Deploy from a branch > main > /root`.
-
-URL prevista: https://nachuss.github.io/NeoTrainer/
-
-## Características
-
-- SPA sin frameworks ni dependencias externas.
-- Diseño oscuro premium inspirado en el boceto facilitado.
-- Imágenes realistas y consistentes del mismo atleta.
-- Vista detallada de ejercicios, variaciones, técnica, errores y alternativas.
-- Dashboard, calendario, entrenamientos, progreso, 7 Minute Workout y perfil.
-- Responsive para móvil, tablet y escritorio.
-- Persistencia local segura.
-
-Creada por [@NachusS](https://nachuss.github.io/)
-
-
-## Autor
+https://nachuss.github.io/NeoTrainer/
 
 Creada por [@NachusS](https://nachuss.github.io/).
 
+## Funcionalidades
 
-## v3.1.0
-- Menú móvil completo mediante panel lateral.
-- Accesos directos móviles a Inicio, Entrenos, Ejercicios, 7 Min y Perfil.
-- Calendario y Progreso accesibles desde el menú completo.
-- XP, racha, entrenamientos, estadísticas y logros comienzan en cero.
-- Las métricas solo aumentan con acciones reales del usuario.
+- Perfil: nombre, sexo, edad, peso, altura, actividad, objetivo, días, duración, material y limitaciones.
+- Cálculo automático de IMC.
+- Imágenes masculinas y femeninas seleccionadas automáticamente.
+- Plan de cuatro semanas calculado con los datos del perfil y el progreso real.
+- Calendario, biblioteca, ficha de ejercicio, progreso y 7 Minute Workout.
+- Navegación completa en escritorio y móvil.
+- XP, entrenamientos, rachas y tiempo comienzan en cero.
+- Persistencia local mediante `localStorage`.
+
+## Publicación
+
+Sube todos los archivos de esta carpeta a la raíz del repositorio y activa GitHub Pages desde la rama `main`, carpeta `/root`.
