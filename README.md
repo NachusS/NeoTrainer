@@ -1,4 +1,4 @@
-# NEO Trainer v2.0.2
+# NEO Trainer v2.0.3
 
 Web-app responsive de entrenamiento personal en casa, preparada para GitHub Pages.
 
@@ -15,6 +15,11 @@ En GitHub configura **Settings → Pages → Deploy from a branch → main → /
 
 ## Versión
 
-- Versión: 2.0.2
+- Versión: 2.0.3
 - Actualización: 28/07/2026 11:36 (Europe/Madrid)
 - Correcciones: validación completa de localStorage, compatibilidad del selector de días, arranque protegido y crédito del creador.
+
+
+## v2.0.3
+- Corregido conflicto con `window.top` que impedía iniciar la aplicación.
+- Verificadas todas las vistas e interacciones principales en Chromium.

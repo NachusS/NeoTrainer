@@ -1,6 +1,6 @@
 window.NEO_DATA = {
-  version: "2.0.2",
-  updated: "28/07/2026 11:36",
+  version: "2.0.3",
+  updated: "28/07/2026 11:52",
   publicUrl: "https://nachuss.github.io/NeoTrainer/",
   equipment: [
     ["none","Sin material","🧍"],["mat","Esterilla","▭"],["dumbbells","Mancuernas","🏋️"],
