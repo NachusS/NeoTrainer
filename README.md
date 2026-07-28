@@ -1,6 +1,7 @@
 # NEO Trainer v4.2.0
 
 Aplicación web estática preparada para GitHub Pages.
+Acceso app: https://nachuss.github.io/NeoTrainer/
 
 ## Instalación por paquetes
 
