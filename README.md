@@ -1,4 +1,4 @@
-# NEO Trainer v3.0.1
+# NEO Trainer v3.1.0
 
 Web-app responsive de entrenamiento personal en casa, diseñada para GitHub Pages.
 
@@ -26,3 +26,11 @@ Creada por [@NachusS](https://nachuss.github.io/)
 ## Autor
 
 Creada por [@NachusS](https://nachuss.github.io/).
+
+
+## v3.1.0
+- Menú móvil completo mediante panel lateral.
+- Accesos directos móviles a Inicio, Entrenos, Ejercicios, 7 Min y Perfil.
+- Calendario y Progreso accesibles desde el menú completo.
+- XP, racha, entrenamientos, estadísticas y logros comienzan en cero.
+- Las métricas solo aumentan con acciones reales del usuario.
