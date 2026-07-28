@@ -1,25 +1,28 @@
-# NEO Trainer v2.0.3
+# NEO Trainer v3.0.1
 
-Web-app responsive de entrenamiento personal en casa, preparada para GitHub Pages.
-
-## Acceso
-
-- Web-app: https://nachuss.github.io/NeoTrainer/
-- Creador: [@NachusS](https://nachuss.github.io/)
+Web-app responsive de entrenamiento personal en casa, diseñada para GitHub Pages.
 
 ## Publicación
 
-Sube directamente a la raíz del repositorio los archivos `index.html`, `styles.css`, `data.js`, `app.js`, `.nojekyll` y la carpeta `assets`.
+1. Descomprime el ZIP.
+2. Sube **el contenido** de la carpeta a la raíz del repositorio.
+3. En GitHub: `Settings > Pages > Deploy from a branch > main > /root`.
 
-En GitHub configura **Settings → Pages → Deploy from a branch → main → /(root)**.
+URL prevista: https://nachuss.github.io/NeoTrainer/
 
-## Versión
+## Características
 
-- Versión: 2.0.3
-- Actualización: 28/07/2026 11:36 (Europe/Madrid)
-- Correcciones: validación completa de localStorage, compatibilidad del selector de días, arranque protegido y crédito del creador.
+- SPA sin frameworks ni dependencias externas.
+- Diseño oscuro premium inspirado en el boceto facilitado.
+- Imágenes realistas y consistentes del mismo atleta.
+- Vista detallada de ejercicios, variaciones, técnica, errores y alternativas.
+- Dashboard, calendario, entrenamientos, progreso, 7 Minute Workout y perfil.
+- Responsive para móvil, tablet y escritorio.
+- Persistencia local segura.
+
+Creada por [@NachusS](https://nachuss.github.io/)
 
 
-## v2.0.3
-- Corregido conflicto con `window.top` que impedía iniciar la aplicación.
-- Verificadas todas las vistas e interacciones principales en Chromium.
+## Autor
+
+Creada por [@NachusS](https://nachuss.github.io/).
