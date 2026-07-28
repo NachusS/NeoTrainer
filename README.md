@@ -1,27 +1,52 @@
-# NEO Trainer
+# NEO Trainer v2.0
 
-**Versión:** 1.0  
-**Última actualización:** 28/07/2026 10:10 (Europe/Madrid)
+Web-app responsive de entrenamiento personal en casa, preparada para GitHub Pages.
 
-## Acceso a la web-app
+- **Versión:** 2.0
+- **Última modificación:** 28/07/2026 10:58 (Europe/Madrid)
+- **Web pública:** https://nachuss.github.io/NeoTrainer/
 
-https://nachuss.github.io/NeoTrainer/
+## Características
 
-## Funcionalidades principales
-
-- Perfil personal y objetivo de entrenamiento en casa.
-- Selección visual de días de la semana con check visible.
-- Inventario de material y alternativas domésticas seguras.
-- Planes para cuádriceps, tren superior, dominadas, full body y 7 Minute Workout.
-- Ilustraciones SVG animadas con posición inicial, final y dirección del movimiento.
-- Acceso opcional a demostraciones de ejercicios en YouTube.
-- Calendario exportable a iPhone, Android, Google Calendar y Outlook mediante ICS.
-- XP, rachas, logros y progreso guardados localmente.
-
-## Referencias de diseño del entrenamiento
-
-La estructura de planes se inspira en principios generales presentes en recursos de entrenamiento doméstico como DAREBEE: adaptación por nivel, rutinas por objetivo, alternativas de ejercicios, calentamiento y lectura sencilla. No se incluyen ni redistribuyen imágenes, pósteres ni textos protegidos de terceros.
+- Perfil con modelo masculino o femenino.
+- Selección de material disponible en casa.
+- Alternativas domésticas cuando falta equipamiento.
+- Biblioteca visual con animaciones por fotogramas.
+- Explicación técnica, errores frecuentes y músculos implicados.
+- Enlaces de demostración en YouTube.
+- Generador semanal con selección visual de días.
+- Entrenamiento intensivo de 7 minutos.
+- Guardado local mediante `localStorage`.
+- Diseño responsive para móvil, tablet y escritorio.
+- Sin frameworks, compilación ni backend.
 
 ## Publicación en GitHub Pages
 
-Sube `index.html` y `README.md` a la raíz del repositorio y activa GitHub Pages desde la rama principal.
+1. Copia todos los archivos en la raíz del repositorio `NeoTrainer`.
+2. Haz commit y push a la rama principal.
+3. En GitHub abre `Settings → Pages`.
+4. Selecciona `Deploy from a branch`, rama principal y carpeta `/root`.
+5. La aplicación estará disponible en https://nachuss.github.io/NeoTrainer/
+
+## Estructura
+
+- `index.html`: entrada de la app.
+- `styles.css`: diseño responsive y animaciones.
+- `data.js`: ejercicios, planes y metadatos.
+- `app.js`: navegación, perfil, planificación y renderizado SVG.
+- `.nojekyll`: evita el procesamiento de Jekyll.
+
+## Ampliar ejercicios
+
+Añade nuevos objetos al array `exercises` de `data.js`. Para una nueva animación, agrega una secuencia de posiciones en el objeto `poses` de `app.js` y usa su clave en `motion`.
+
+## Historial
+
+### v2.0 — 28/07/2026 10:58
+
+- Rediseño completo.
+- Animaciones visuales diferenciadas por sexo.
+- Perfil y equipamiento doméstico.
+- Planning semanal y selector de días corregido.
+- 7 Minute Workout.
+- Biblioteca técnica con YouTube.
