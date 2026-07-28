@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Escaladores - start">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07111f"/><stop offset="1" stop-color="#15243a"/></linearGradient><radialGradient id="light"><stop stop-color="#334155" stop-opacity=".7"/><stop offset="1" stop-color="#020617" stop-opacity="0"/></radialGradient></defs>
+<rect width="800" height="500" fill="url(#bg)"/><circle cx="520" cy="180" r="260" fill="url(#light)"/><path d="M0 440 H800" stroke="#334155" stroke-width="3"/><path d="M80 440 L180 250 M720 440 L620 250" stroke="#1e293b" stroke-width="8"/>
+<rect x="24" y="22" width="200" height="42" rx="18" fill="#22d3ee" fill-opacity=".18" stroke="#22d3ee"/><text x="42" y="50" fill="#22d3ee" font-family="Arial" font-size="20" font-weight="bold">START</text>
+<text x="28" y="476" fill="#e2e8f0" font-family="Arial" font-size="25" font-weight="bold">Escaladores</text><text x="610" y="476" fill="#94a3b8" font-family="Arial" font-size="17">Cardio · Core</text>
+<line x1="324" y1="275" x2="287" y2="310" stroke="#b87855" stroke-width="24" stroke-linecap="round"/><line x1="287" y1="310" x2="250" y2="365" stroke="#b87855" stroke-width="20" stroke-linecap="round"/><line x1="396" y1="275" x2="350" y2="312" stroke="#b87855" stroke-width="24" stroke-linecap="round"/><line x1="350" y1="312" x2="305" y2="370" stroke="#b87855" stroke-width="20" stroke-linecap="round"/><line x1="403" y1="320" x2="454" y2="347" stroke="#111827" stroke-width="30" stroke-linecap="round"/><line x1="454" y1="347" x2="505" y2="375" stroke="#b87855" stroke-width="24" stroke-linecap="round"/><line x1="457" y1="320" x2="526" y2="347" stroke="#111827" stroke-width="30" stroke-linecap="round"/><line x1="526" y1="347" x2="595" y2="375" stroke="#b87855" stroke-width="24" stroke-linecap="round"/>
+<path d="M 324 275 Q 360 257 396 275 L 457 320 Q 430 338 403 320 Z" fill="#111827" stroke="#22d3ee" stroke-width="3"/>
+<ellipse cx="320" cy="230" rx="33" ry="42" fill="#b87855"/><path d="M 287 220 Q 320 175 353 220 Q 325 202 287 220" fill="#251711"/>
+<circle cx="310" cy="230" r="2.5" fill="#111827"/><path d="M 312 248 Q 320 252 328 248" fill="none" stroke="#7c2d12" stroke-width="2"/>
+<circle cx="250" cy="365" r="11" fill="#b87855"/><circle cx="305" cy="370" r="11" fill="#b87855"/>
+</svg>
