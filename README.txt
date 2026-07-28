@@ -1,0 +1,1 @@
+Abre index.html en un navegador. Incluye ilustraciones SVG de inicio/final para cada ejercicio y enlaces opcionales a demostraciones en vídeo.

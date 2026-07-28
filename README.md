@@ -1,24 +1,28 @@
-# NEO Trainer v4.0.0
+# NEO Trainer v4.1.0
 
-Aplicación web estática, responsive y publicable en GitHub Pages.
+Web-app responsive de entrenamiento personalizado para casa, creada por [@NachusS](https://nachuss.github.io/).
 
-## URL del proyecto
+## Publicación en GitHub Pages
 
-https://nachuss.github.io/NeoTrainer/
+1. Descomprime el ZIP.
+2. Copia **el contenido** directamente en la raíz del repositorio `NeoTrainer`.
+3. En GitHub abre `Settings > Pages`.
+4. Selecciona `Deploy from a branch`, rama `main`, carpeta `/ (root)`.
+5. La aplicación se publicará en `https://nachuss.github.io/NeoTrainer/`.
 
-Creada por [@NachusS](https://nachuss.github.io/).
+## Cambios v4.1.0
 
-## Funcionalidades
+- La pantalla Inicio ya no muestra la biblioteca completa.
+- Selección explícita de días de la semana desde el perfil.
+- Plan personalizado de cuatro semanas.
+- Calendario navegable por meses.
+- Cada día programado abre el listado de ejercicios de la sesión.
+- Fichas de ejercicios corregidas con imagen, técnica, músculos y búsqueda directa en YouTube.
+- Biblioteca ampliada a 24 ejercicios de cuerpo completo.
+- 7 Minute Workout guiado minuto a minuto con ejercicio, explicación, imagen y vídeos.
+- Progreso inicial a cero y actualización únicamente al completar sesiones.
+- Diseño responsive con menú completo en móvil.
 
-- Perfil: nombre, sexo, edad, peso, altura, actividad, objetivo, días, duración, material y limitaciones.
-- Cálculo automático de IMC.
-- Imágenes masculinas y femeninas seleccionadas automáticamente.
-- Plan de cuatro semanas calculado con los datos del perfil y el progreso real.
-- Calendario, biblioteca, ficha de ejercicio, progreso y 7 Minute Workout.
-- Navegación completa en escritorio y móvil.
-- XP, entrenamientos, rachas y tiempo comienzan en cero.
-- Persistencia local mediante `localStorage`.
+## Nota visual
 
-## Publicación
-
-Sube todos los archivos de esta carpeta a la raíz del repositorio y activa GitHub Pages desde la rama `main`, carpeta `/root`.
+Los ejercicios nuevos utilizan temporalmente la colección fotográfica local disponible. La estructura permite sustituir cada imagen añadiendo el JPG correspondiente y actualizando el campo `image` en `js/data.js`.

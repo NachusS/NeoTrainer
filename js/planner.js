@@ -1,84 +1,14 @@
 'use strict';
-window.NEO_PLANNER = (() => {
-  const D = () => window.NEO_DATA;
-  function bmi(profile){
-    const w=Number(profile.weight), h=Number(profile.height)/100;
-    return w>0&&h>0 ? w/(h*h) : null;
-  }
-  function bmiLabel(value){
-    if(value===null) return {label:'Pendiente',tone:'neutral'};
-    if(value<18.5) return {label:'Peso bajo',tone:'amber'};
-    if(value<25) return {label:'Rango saludable',tone:'green'};
-    if(value<30) return {label:'Sobrepeso',tone:'amber'};
-    if(value<35) return {label:'Obesidad grado I',tone:'red'};
-    if(value<40) return {label:'Obesidad grado II',tone:'red'};
-    return {label:'Obesidad grado III',tone:'red'};
-  }
-  function readiness(profile){
-    const required=['name','sex','age','weight','height','activity','goal','daysPerWeek','minutesPerSession'];
-    return required.every(k=>profile[k]!==null&&profile[k]!==''&&profile[k]!==undefined);
-  }
-  function riskScore(profile){
-    const age=Number(profile.age)||30, b=bmi(profile), limits=profile.limitations||[];
-    let score=0;
-    if(age>=65) score+=3; else if(age>=55) score+=2; else if(age>=45) score+=1;
-    if(b!==null){ if(b>=35||b<17) score+=3; else if(b>=30||b<18.5) score+=2; else if(b>=27) score+=1; }
-    if(profile.activity==='sedentary') score+=2;
-    if(limits.includes('cardio')) score+=3;
-    score+=Math.min(2,limits.filter(x=>x!=='none').length);
-    return score;
-  }
-  function intensity(profile,stats){
-    const r=riskScore(profile), completed=Number(stats.workouts)||0;
-    if(r>=6) return {level:1,label:'Muy suave',sets:2,rest:105};
-    if(r>=4) return {level:1,label:'Suave',sets:2,rest:90};
-    if(r>=2) return {level:2,label:'Moderada',sets:3,rest:75};
-    if(completed>=12 && profile.activity==='active') return {level:4,label:'Alta',sets:4,rest:45};
-    if(completed>=5) return {level:3,label:'Media-alta',sets:3,rest:60};
-    return {level:2,label:'Moderada',sets:3,rest:75};
-  }
-  function availableExercise(ex,profile,intensityLevel){
-    const eq=profile.equipment||['none'];
-    const limits=profile.limitations||[];
-    const equipmentOk=ex.equipment.includes('none')||ex.equipment.some(x=>eq.includes(x));
-    const limitationOk=!ex.avoid.some(x=>limits.includes(x));
-    return equipmentOk && limitationOk && ex.level<=Math.max(1,intensityLevel);
-  }
-  function selectExercises(profile,stats){
-    const intensityData=intensity(profile,stats);
-    let list=D().exercises.filter(ex=>availableExercise(ex,profile,intensityData.level));
-    if(!list.length) list=D().exercises.filter(ex=>ex.id==='incline'||ex.id==='knees');
-    if(profile.goal==='strength'||profile.goal==='muscle') list.sort((a,b)=>b.level-a.level);
-    if(profile.goal==='fatloss') list.sort((a,b)=>b.duration-a.duration);
-    if(profile.goal==='mobility'||riskScore(profile)>=4) list.sort((a,b)=>a.level-b.level);
-    return list.slice(0,Math.min(5,list.length));
-  }
-  function makePlan(profile,stats,startDate=new Date()){
-    if(!readiness(profile)) return {ready:false,reason:'Completa el perfil para generar tu plan.'};
-    const i=intensity(profile,stats), chosen=selectExercises(profile,stats);
-    const requested=Math.max(2,Math.min(6,Number(profile.daysPerWeek)||3));
-    const risk=riskScore(profile), days=risk>=6?Math.min(2,requested):risk>=4?Math.min(3,requested):requested;
-    const patterns={2:[1,4],3:[1,3,5],4:[1,2,4,6],5:[1,2,3,5,6],6:[1,2,3,4,5,6]};
-    const weekdayPattern=patterns[days]||patterns[3], sessions=[];
-    for(let offset=0;offset<42 && sessions.length<days*4;offset++){
-      const d=new Date(startDate); d.setHours(12,0,0,0); d.setDate(startDate.getDate()+offset);
-      const wd=d.getDay()===0?7:d.getDay();
-      if(!weekdayPattern.includes(wd)) continue;
-      const rotation=sessions.length%Math.max(1,chosen.length);
-      const ordered=[...chosen.slice(rotation),...chosen.slice(0,rotation)];
-      sessions.push({
-        id:`session-${d.toISOString().slice(0,10)}`,
-        date:d.toISOString().slice(0,10),
-        title:profile.goal==='lower'?'Fuerza y estabilidad':'Full body adaptado',
-        minutes:Number(profile.minutesPerSession)||30,
-        intensity:i.label,
-        sets:i.sets,
-        rest:i.rest,
-        exercises:ordered.slice(0,Math.max(2,Math.min(4,Math.floor((Number(profile.minutesPerSession)||30)/8)))).map(x=>x.id),
-        completed:false
-      });
-    }
-    return {ready:true,days,intensity:i,exercises:chosen,sessions,reason:`Ajustado a ${profile.age} años, IMC ${bmi(profile).toFixed(1)}, actividad ${profile.activity} y objetivo ${profile.goal}.`};
-  }
-  return {bmi,bmiLabel,readiness,riskScore,intensity,selectExercises,makePlan};
+window.NEO_PLANNER=(()=>{
+ const D=()=>window.NEO_DATA;
+ function bmi(p){const w=Number(p.weight),h=Number(p.height)/100;return w>0&&h>0?w/(h*h):null}
+ function bmiLabel(v){if(v===null)return{label:'Pendiente',tone:'neutral'};if(v<18.5)return{label:'Peso bajo',tone:'amber'};if(v<25)return{label:'Rango saludable',tone:'green'};if(v<30)return{label:'Sobrepeso',tone:'amber'};if(v<35)return{label:'Obesidad grado I',tone:'red'};if(v<40)return{label:'Obesidad grado II',tone:'red'};return{label:'Obesidad grado III',tone:'red'}}
+ function readiness(p){return ['name','sex','age','weight','height','activity','goal','minutesPerSession'].every(k=>p[k]!==null&&p[k]!==''&&p[k]!==undefined)&&Array.isArray(p.weekdays)&&p.weekdays.length>0}
+ function riskScore(p){const age=+p.age||30,b=bmi(p),l=p.limitations||[];let s=0;if(age>=65)s+=3;else if(age>=55)s+=2;else if(age>=45)s++;if(b!==null){if(b>=35||b<17)s+=3;else if(b>=30||b<18.5)s+=2;else if(b>=27)s++}if(p.activity==='sedentary')s+=2;if(l.includes('cardio'))s+=3;s+=Math.min(2,l.filter(x=>x!=='none').length);return s}
+ function intensity(p,stats){const r=riskScore(p),w=+stats.workouts||0;if(r>=6)return{level:1,label:'Muy suave',sets:2,rest:105};if(r>=4)return{level:1,label:'Suave',sets:2,rest:90};if(r>=2)return{level:2,label:'Moderada',sets:3,rest:75};if(w>=12&&p.activity==='active')return{level:4,label:'Alta',sets:4,rest:45};if(w>=5)return{level:3,label:'Media-alta',sets:3,rest:60};return{level:2,label:'Moderada',sets:3,rest:75}}
+ function available(ex,p,lvl){const eq=p.equipment||['none'],limits=p.limitations||[];return (ex.equipment.includes('none')||ex.equipment.some(x=>eq.includes(x)))&&!ex.avoid.some(x=>limits.includes(x))&&ex.level<=Math.max(1,lvl)}
+ function selectExercises(p,stats){const i=intensity(p,stats);let list=D().exercises.filter(x=>available(x,p,i.level));if(!list.length)list=D().exercises.filter(x=>['march','mobility-flow','incline'].includes(x.id));const priority={lower:['Piernas','Glúteos'],pullupGoal:['Espalda','Core'],strength:['Espalda','Piernas','Pecho'],muscle:['Pecho','Espalda','Piernas'],mobility:['Movilidad','Core'],fatloss:['Cardio','Full body'],general:['Core','Piernas','Pecho']};const areas=priority[p.goal]||priority.general;list.sort((a,b)=>{const ai=areas.findIndex(x=>a.area.includes(x)),bi=areas.findIndex(x=>b.area.includes(x));return (ai<0?99:ai)-(bi<0?99:bi)||a.level-b.level});return list.slice(0,Math.min(14,list.length))}
+ function makePlan(p,stats,startDate=new Date()){if(!readiness(p))return{ready:false,reason:'Completa el perfil y selecciona los días de entrenamiento.'};const i=intensity(p,stats),chosen=selectExercises(p,stats),weekdays=[...new Set(p.weekdays.map(Number))].filter(x=>x>=1&&x<=7).sort(),sessions=[];const start=new Date(startDate);start.setHours(12,0,0,0);for(let offset=0;offset<35;offset++){const d=new Date(start);d.setDate(start.getDate()+offset);const wd=d.getDay()===0?7:d.getDay();if(!weekdays.includes(wd))continue;const index=sessions.length;const groups=[chosen.filter(x=>/(Piernas|Glúteos)/.test(x.area)),chosen.filter(x=>/(Pecho|Espalda|Hombros|Brazos|Tríceps)/.test(x.area)),chosen.filter(x=>/(Core|Cardio|Full body|Movilidad)/.test(x.area))];let pool=[...groups[index%3],...chosen].filter((x,j,a)=>a.findIndex(y=>y.id===x.id)===j);const count=Math.max(4,Math.min(7,Math.floor((+p.minutesPerSession||30)/6)));const exs=pool.slice(0,count).map(x=>x.id);sessions.push({id:`session-${d.toISOString().slice(0,10)}`,date:d.toISOString().slice(0,10),title:index%3===0?'Piernas y core':index%3===1?'Tren superior':'Full body y movilidad',minutes:+p.minutesPerSession||30,intensity:i.label,sets:i.sets,rest:i.rest,exercises:exs,completed:false})}
+ return{ready:true,days:weekdays.length,weekdays,intensity:i,exercises:chosen,sessions,reason:`Plan de 4 semanas ajustado a edad, sexo, IMC, actividad, objetivo, material y limitaciones.`}}
+ return{bmi,bmiLabel,readiness,riskScore,intensity,selectExercises,makePlan}
 })();
