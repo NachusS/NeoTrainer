@@ -1,9 +1,9 @@
-# NEO Trainer v2.0
+# NEO Trainer v2.0.1
 
 Web-app responsive de entrenamiento personal en casa, preparada para GitHub Pages.
 
 - **Versión:** 2.0
-- **Última modificación:** 28/07/2026 10:58 (Europe/Madrid)
+- **Última modificación:** 28/07/2026 11:11 (Europe/Madrid)
 - **Web pública:** https://nachuss.github.io/NeoTrainer/
 
 ## Características
@@ -42,7 +42,7 @@ Añade nuevos objetos al array `exercises` de `data.js`. Para una nueva animaci�
 
 ## Historial
 
-### v2.0 — 28/07/2026 10:58
+### v2.0.1 — 28/07/2026 11:11
 
 - Rediseño completo.
 - Animaciones visuales diferenciadas por sexo.
@@ -50,3 +50,11 @@ Añade nuevos objetos al array `exercises` de `data.js`. Para una nueva animaci�
 - Planning semanal y selector de días corregido.
 - 7 Minute Workout.
 - Biblioteca técnica con YouTube.
+
+
+## Corrección 2.0.1
+- Arranque protegido frente a datos antiguos o corruptos de `localStorage`.
+- Migración automática del perfil guardado.
+- Pantalla de recuperación si se produce un error de carga.
+- Scripts cargados con `defer` para garantizar que el DOM esté disponible.
+- Días iniciales corregidos a lunes, miércoles y viernes.

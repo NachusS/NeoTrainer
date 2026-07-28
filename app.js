@@ -1,9 +1,30 @@
-const D=window.NEO_DATA;
-const $=s=>document.querySelector(s);const $$=s=>[...document.querySelectorAll(s)];
-const defaults={profile:{name:"Nacho",sex:"male",age:40,weight:78,level:"Intermedio"},equipment:["none","mat","backpack"],goal:"fullbody",days:[1,3,5],xp:8420,streak:12,completed:24};
-let state=JSON.parse(localStorage.getItem("neoTrainerV2")||"null")||defaults;
-let view="home";
-function save(){localStorage.setItem("neoTrainerV2",JSON.stringify(state))}
+const D = window.NEO_DATA || {version:"2.0.1",updated:"28/07/2026 11:11",publicUrl:"https://nachuss.github.io/NeoTrainer/",equipment:[],goals:[],exercises:[]};
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const defaults = {profile:{name:"Nacho",sex:"male",age:40,weight:78,level:"Intermedio"},equipment:["none","mat","backpack"],goal:"fullbody",days:[0,2,4],xp:8420,streak:12,completed:24};
+function cloneDefaults(){ return JSON.parse(JSON.stringify(defaults)); }
+function loadState(){
+  try {
+    const raw = localStorage.getItem("neoTrainerV2");
+    if (!raw) return cloneDefaults();
+    const saved = JSON.parse(raw);
+    const base = cloneDefaults();
+    return {
+      ...base,
+      ...(saved && typeof saved === "object" ? saved : {}),
+      profile:{...base.profile,...(saved?.profile && typeof saved.profile === "object" ? saved.profile : {})},
+      equipment:Array.isArray(saved?.equipment) ? saved.equipment : base.equipment,
+      days:Array.isArray(saved?.days) ? saved.days.filter(n=>Number.isInteger(n)&&n>=0&&n<=6) : base.days
+    };
+  } catch (error) {
+    console.warn("Estado local inválido; se restauran valores seguros.", error);
+    try { localStorage.removeItem("neoTrainerV2"); } catch (_) {}
+    return cloneDefaults();
+  }
+}
+let state = loadState();
+let view = "home";
+function save(){ try { localStorage.setItem("neoTrainerV2",JSON.stringify(state)); } catch (error) { console.warn("No se pudo guardar el estado local.", error); } }
 function app(){document.getElementById("app").innerHTML=`<div class="app-shell">${sidebar()}<main class="main"><div id="view"></div></main></div>${bottomNav()}<div id="modalRoot"></div>`;renderView();bindNav()}
 function sidebar(){return `<aside class="sidebar"><div class="brand">NEO<small>TRAINER</small></div><div class="profile-mini"><div class="avatar">${state.profile.sex==='female'?'👩':'👨'}</div><h3>¡Hola, ${state.profile.name}!</h3><p>${state.profile.level} · Entrena en casa</p><div class="xp">★ ${state.xp.toLocaleString('es-ES')} XP</div></div><nav class="nav">${navButtons()}</nav><div class="sidebar-footer">v${D.version} · ${D.updated}</div></aside>`}
 function navButtons(){const items=[['home','⌂','Inicio'],['plan','▦','Plan'],['exercises','🏋','Ejercicios'],['seven','◴','7 Min'],['profile','⚙','Perfil']];return items.map(([id,ic,tx])=>`<button data-view="${id}" class="${view===id?'active':''}"><span>${ic}</span>${tx}</button>`).join('')}
@@ -36,4 +57,14 @@ let timerInt;function startSeven(){clearInterval(timerInt);let s=420;const el=$(
 function profile(){return `${top('Perfil y equipamiento','La representación visual cambia según el sexo seleccionado.')}<section class="card card-pad"><div class="grid form-grid"><div class="field"><label>Nombre</label><input id="nameInput" value="${state.profile.name}"></div><div class="field"><label>Sexo del modelo</label><select id="sexInput"><option value="male" ${state.profile.sex==='male'?'selected':''}>Masculino</option><option value="female" ${state.profile.sex==='female'?'selected':''}>Femenino</option></select></div><div class="field"><label>Edad</label><input id="ageInput" type="number" value="${state.profile.age}"></div><div class="field"><label>Peso (kg)</label><input id="weightInput" type="number" value="${state.profile.weight}"></div></div><h3>Material disponible en casa</h3><div class="choice-grid">${D.equipment.map(e=>`<button class="choice ${state.equipment.includes(e[0])?'selected':''}" data-equipment="${e[0]}"><b>${e[2]} ${e[1]}</b></button>`).join('')}</div><div style="margin-top:18px"><button class="btn primary" id="saveProfile">Guardar perfil</button></div></section><div class="section-head"><div><h2>Vista del modelo</h2><p>Las animaciones de ejercicios se regeneran al guardar.</p></div></div><section class="grid exercise-grid">${D.exercises.slice(0,2).map(exCard).join('')}</section>`}
 function bindDynamic(){$$('[data-ex]').forEach(c=>c.onclick=e=>{if(!e.target.closest('a'))showExercise(c.dataset.ex)});$$('[data-equipment]').forEach(b=>b.onclick=()=>{const id=b.dataset.equipment;state.equipment=state.equipment.includes(id)?state.equipment.filter(x=>x!==id):[...state.equipment,id];save();renderView()});$('#saveProfile')?.addEventListener('click',()=>{state.profile.name=$('#nameInput').value||'Usuario';state.profile.sex=$('#sexInput').value;state.profile.age=+$('#ageInput').value||state.profile.age;state.profile.weight=+$('#weightInput').value||state.profile.weight;save();app()});$('#refreshPlan')?.addEventListener('click',()=>{state.goal=$('#goalSel').value;state.profile.level=$('#levelSel').value;state.days=$$('.day-check input:checked').map(x=>+x.value);save();renderView()})}
 function showExercise(id){const ex=D.exercises.find(x=>x.id===id);$('#modalRoot').innerHTML=`<div class="modal" id="modal"><div class="modal-card"><div class="modal-head"><div><strong>${ex.name}</strong><div style="color:var(--muted);font-size:12px">${ex.category} · ${ex.level}</div></div><button class="btn" id="closeModal">Cerrar</button></div><div class="modal-body"><div class="grid detail-grid"><div><div class="card">${motion(ex.motion,state.profile.sex)}</div><div class="section-head"><div><h2>Técnica paso a paso</h2></div></div><ol class="steps">${ex.steps.map(s=>`<li>${s}</li>`).join('')}</ol><div class="notice"><b>Error frecuente:</b> ${ex.mistake}</div></div><aside><div class="card card-pad"><h3>Dosificación</h3><p><b>${ex.sets}</b> series</p><p><b>${ex.reps}</b></p><p><b>${ex.rest}</b> descanso</p><h3>Músculos</h3><div class="tags">${ex.muscles.map(m=>`<span class="tag">${m}</span>`).join('')}</div><h3>Material</h3><p>${ex.equipment.join(', ')}</p><h3>Alternativa en casa</h3><p>${ex.home}</p><a class="btn primary" style="display:inline-block;text-decoration:none" target="_blank" rel="noopener" href="${ex.youtube}">Ver en YouTube</a></div></aside></div></div></div></div>`;$('#closeModal').onclick=()=>$('#modalRoot').innerHTML='';$('#modal').onclick=e=>{if(e.target.id==='modal')$('#modalRoot').innerHTML=''}}
-app();
+function boot(){
+  try {
+    const mount = document.getElementById("app");
+    if (!mount) throw new Error("No existe el contenedor #app");
+    app();
+  } catch (error) {
+    console.error("Error al iniciar NEO Trainer", error);
+    document.body.innerHTML = `<main style="min-height:100vh;display:grid;place-items:center;padding:24px;background:#07111f;color:#f4f7fb;font-family:system-ui"><section style="max-width:680px;padding:28px;border:1px solid #26364d;border-radius:20px;background:#0d1929"><h1 style="margin-top:0">NEO Trainer no pudo iniciarse</h1><p style="color:#aebbd0">Se ha detectado un problema con los datos guardados o con la carga de los archivos.</p><button onclick="try{localStorage.removeItem('neoTrainerV2')}catch(e){};location.reload()" style="border:0;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer">Restablecer y recargar</button><details style="margin-top:18px"><summary>Detalle técnico</summary><pre style="white-space:pre-wrap;color:#ffb4b4">${String(error?.message||error)}</pre></details></section></main>`;
+  }
+}
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
