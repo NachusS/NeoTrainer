@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Zancadas hacia atrás - start">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07111f"/><stop offset="1" stop-color="#15243a"/></linearGradient><radialGradient id="light"><stop stop-color="#334155" stop-opacity=".7"/><stop offset="1" stop-color="#020617" stop-opacity="0"/></radialGradient></defs>
+<rect width="800" height="500" fill="url(#bg)"/><circle cx="520" cy="180" r="260" fill="url(#light)"/><path d="M0 440 H800" stroke="#334155" stroke-width="3"/><path d="M80 440 L180 250 M720 440 L620 250" stroke="#1e293b" stroke-width="8"/>
+<rect x="24" y="22" width="200" height="42" rx="18" fill="#c084fc" fill-opacity=".18" stroke="#c084fc"/><text x="42" y="50" fill="#c084fc" font-family="Arial" font-size="20" font-weight="bold">START</text>
+<text x="28" y="476" fill="#e2e8f0" font-family="Arial" font-size="25" font-weight="bold">Zancadas hacia atrás</text><text x="610" y="476" fill="#94a3b8" font-family="Arial" font-size="17">Piernas</text>
+<line x1="360" y1="210" x2="350" y2="235" stroke="#c98d6b" stroke-width="24" stroke-linecap="round"/><line x1="350" y1="235" x2="340" y2="280" stroke="#c98d6b" stroke-width="20" stroke-linecap="round"/><line x1="420" y1="210" x2="430" y2="235" stroke="#c98d6b" stroke-width="24" stroke-linecap="round"/><line x1="430" y1="235" x2="440" y2="280" stroke="#c98d6b" stroke-width="20" stroke-linecap="round"/><line x1="356" y1="300" x2="383" y2="365" stroke="#7c3aed" stroke-width="30" stroke-linecap="round"/><line x1="383" y1="365" x2="410" y2="430" stroke="#c98d6b" stroke-width="24" stroke-linecap="round"/><line x1="424" y1="300" x2="462" y2="365" stroke="#7c3aed" stroke-width="30" stroke-linecap="round"/><line x1="462" y1="365" x2="500" y2="430" stroke="#c98d6b" stroke-width="24" stroke-linecap="round"/>
+<path d="M 360 210 Q 390 192 420 210 L 424 300 Q 390 318 356 300 Z" fill="#7c3aed" stroke="#c084fc" stroke-width="3"/>
+<ellipse cx="390" cy="135" rx="33" ry="42" fill="#c98d6b"/><path d="M 357 125 Q 390 80 423 125 Q 395 107 357 125" fill="#251711"/>
+<circle cx="380" cy="135" r="2.5" fill="#111827"/><path d="M 382 153 Q 390 157 398 153" fill="none" stroke="#7c2d12" stroke-width="2"/>
+<circle cx="340" cy="280" r="11" fill="#c98d6b"/><circle cx="440" cy="280" r="11" fill="#c98d6b"/>
+</svg>
