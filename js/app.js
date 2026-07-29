@@ -1,7 +1,7 @@
 (() => {
 'use strict';
 const DATA=window.NEO_DATA, PLANNER=window.NEO_PLANNER, root=document.getElementById('app');
-const KEY='neoTrainerV420';
+const KEY='neoTrainerV421';
 const defaults={route:'home',selectedExercise:null,calendarCursor:null,selectedSession:null,profile:{name:'',sex:'male',age:null,weight:null,height:null,activity:'',goal:'',minutesPerSession:30,weekdays:[1,3,5],equipment:['none'],limitations:['none']},stats:{xp:0,workouts:0,streak:0,bestStreak:0,totalMinutes:0},plan:null};
 function clone(x){return JSON.parse(JSON.stringify(x))}
 function read(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return x&&typeof x==='object'?x:null}catch{return null}}
@@ -12,8 +12,8 @@ function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&l
 function exById(id){return DATA.exercises.find(x=>x.id===id)}
 function asset(path){return window.NEO_ASSETS?.[path]||path}
 function imageKey(ex,phase='main'){const sex=state.profile.sex==='female'?'female':'male';const id=ex?.id||'mobility-flow';const suffix=phase==='start'||phase==='end'?`-${phase}`:'';return `${sex}/${id}${suffix}`}
-function imageFile(ex,phase='main'){const key=imageKey(ex,phase);return asset(window.NEO_IMAGES?.[key]||`assets/exercises/${key}.webp`)}
-function avatar(){const sex=state.profile.sex==='female'?'female':'male';return asset(window.NEO_IMAGES?.[`${sex}/avatar`]||`assets/exercises/${sex}/avatar.webp`)}
+function imageFile(ex,phase='main'){const key=imageKey(ex,phase);const mapped=window.NEO_IMAGES?.[key];return asset(mapped||`assets/exercises/${key}.svg`)}
+function avatar(){const sex=state.profile.sex==='female'?'female':'male';return asset(window.NEO_IMAGES?.[`${sex}/avatar`]||`assets/exercises/${sex}/avatar.svg`)}
 function bmi(){return PLANNER.bmi(state.profile)}
 function currentPlan(){return state.plan?.ready?state.plan:PLANNER.makePlan(state.profile,state.stats)}
 function level(){const x=state.stats.xp;return x>=5000?'Elite':x>=2500?'Avanzado':x>=1000?'Intermedio':x>=250?'Principiante':'Inicial'}

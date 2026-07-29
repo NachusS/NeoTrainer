@@ -1,6 +1,6 @@
 'use strict';
 window.NEO_DATA = {
-  version:'4.2.0', build:'28/07/2026 18:30',
+  version:'4.2.1', build:'29/07/2026 19:44',
   equipment:[['none','Sin material'],['mat','Esterilla'],['dumbbells','Mancuernas'],['bands','Bandas'],['pullup','Barra de dominadas'],['bench','Banco'],['trx','TRX'],['kettlebell','Kettlebell']],
   goals:[['general','Mejorar condición física'],['fatloss','Reducir grasa corporal'],['strength','Ganar fuerza'],['muscle','Ganar masa muscular'],['mobility','Mejorar movilidad'],['lower','Potenciar piernas'],['pullupGoal','Conseguir dominadas']],
   activity:[['sedentary','Sedentario'],['light','Actividad ligera'],['moderate','Actividad moderada'],['active','Muy activo']],
